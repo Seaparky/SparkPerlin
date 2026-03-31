@@ -2,10 +2,25 @@
 //
 
 #include <iostream>
+#include "PerlinBase/PerlinNoise.hpp"
+
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    siv::PerlinNoise perlinA{ std::random_device{} };
+
+	siv::BasicPerlinNoise<double> perlinB;
+    
+	for (std::int32_t y = 0; y < 20; ++y)
+	{
+		for (std::int32_t x = 0; x < 20; ++x)
+		{
+			
+			const double noise = perlinB.octave2D_01(x * 0.1, y * 0.1, 6, 0.35);
+			std::cout << static_cast<int>(std::floor(noise * 10) - 0.5);
+		}
+		std::cout << '\n';
+	}
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
