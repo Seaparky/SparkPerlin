@@ -3,33 +3,58 @@
 
 #include <iostream>
 #include "PerlinBase/PerlinNoise.hpp"
+#include "PerlinImage.h"
 
 
 int main()
 {
-    siv::PerlinNoise perlinA{ std::random_device{} };
+	siv::PerlinNoise perlinA{ std::random_device{} };
 
 	siv::BasicPerlinNoise<double> perlinB;
-    
-	for (std::int32_t y = 0; y < 20; ++y)
+
+	for (std::int32_t y = 0; y < 10; ++y)
 	{
-		for (std::int32_t x = 0; x < 20; ++x)
+		for (std::int32_t x = 0; x < 10; ++x)
 		{
-			
-			const double noise = perlinB.octave2D_01(x * 0.1, y * 0.1, 6, 0.35);
-			std::cout << static_cast<int>(std::floor(noise * 10) - 0.5);
+			const double noise = perlinA.octave2D_01(x * 0.1, y * 0.1, 6, 0.45);
+			std::cout << static_cast<int>(std::floor(noise * 10) - 0.5) << "\t";
 		}
 		std::cout << '\n';
 	}
+
+	Image image{ 512,512 };
+
+	double frequency = std::clamp(0.5, 0.1, 64.0);
+
+	std::int32_t octaves = std::clamp(24, 1, 16);
+
+
+	const double xFrequency = (frequency / image.width());
+	const double yFrequency = (frequency / image.height());
+
+	for (std::int32_t y = 0; y < image.height(); ++y)
+	{
+		for (std::int32_t x = 0; x < image.width(); ++x)
+		{
+			const RGB color(perlinA.octave2D_01((x * xFrequency), (y * yFrequency), octaves));
+			image.set(x, y, color);
+		}
+	}
+
+	std::stringstream ss;
+	ss << 'f' << frequency << 'o' << octaves << ".bmp";
+
+	if (image.saveBMP(ss.str()))
+	{
+		std::cout << "...saved \"" << ss.str() << "\"\n";
+	}
+
+	//for (std::int32_t x = 0; x < 10; ++x)
+	//{
+	//	const double noise = perlinA.octave1D_01(x * 0.1, 6, 0.35);
+	//	std::cout << static_cast<int>(std::floor(noise * 10) - 0.5) << "\t";
+	//}
+	//std::cout << '\n';
+
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
