@@ -66,7 +66,7 @@ public:
 
 	std::int32_t height() const noexcept { return m_height; }
 
-	bool saveBMP(const std::string& path)
+	bool savePNG(const std::string& path)
 	{
 		const std::int32_t  rowSize = m_width * 3 + m_width % 4;
 		const std::uint32_t bmpsize = rowSize * m_height;
