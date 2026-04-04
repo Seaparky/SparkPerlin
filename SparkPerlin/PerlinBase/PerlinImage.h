@@ -3,7 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include "PerlinBase/PerlinNoise.hpp"
+#include "PerlinNoise.hpp"
 
 #pragma pack (push, 1)
 struct BMPHeader

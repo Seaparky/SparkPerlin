@@ -1,7 +1,7 @@
 #pragma once
 #include "ProjectState.h"
-#include "PerlinBase/PerlinNoise.hpp"
-#include "PerlinBase/PerlinImage.h"
+#include "../PerlinBase/PerlinNoise.hpp"
+#include "../PerlinBase/PerlinImage.h"
 class ConsoleState : public ProjectState
 {
 	virtual bool Update(std::stack<std::shared_ptr<ProjectState>>& aProjectState) override;

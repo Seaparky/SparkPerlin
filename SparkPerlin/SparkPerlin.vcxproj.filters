@@ -51,10 +51,10 @@
     <ClCompile Include="ImGUI\imgui_widgets.cpp">
       <Filter>Source Files\ImGUI</Filter>
     </ClCompile>
-    <ClCompile Include="MainState.cpp">
+    <ClCompile Include="States\ConsoleState.cpp">
       <Filter>States</Filter>
     </ClCompile>
-    <ClCompile Include="ConsoleState.cpp">
+    <ClCompile Include="States\MainState.cpp">
       <Filter>States</Filter>
     </ClCompile>
   </ItemGroup>
@@ -89,13 +89,13 @@
     <ClInclude Include="ImGUI\imstb_truetype.h">
       <Filter>Source Files\ImGUI</Filter>
     </ClInclude>
-    <ClInclude Include="ProjectState.h">
+    <ClInclude Include="States\ConsoleState.h">
       <Filter>States</Filter>
     </ClInclude>
-    <ClInclude Include="MainState.h">
+    <ClInclude Include="States\MainState.h">
       <Filter>States</Filter>
     </ClInclude>
-    <ClInclude Include="ConsoleState.h">
+    <ClInclude Include="States\ProjectState.h">
       <Filter>States</Filter>
     </ClInclude>
   </ItemGroup>
