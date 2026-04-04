@@ -10,6 +10,8 @@
 #include "ImGUI/imgui_impl_dx11.h"
 #include "ImGUI/imgui_impl_win32.h"
 
+#include "States/MainState.h"
+
 
 // Data
 static ID3D11Device* g_pd3dDevice = nullptr;
@@ -33,6 +35,17 @@ void Save(double aFrequency, int32_t aOctaves, uint32_t& aSeed);
 
 int main()
 {
+
+	std::stack<std::shared_ptr<ProjectState>> projectStack;
+
+	projectStack.push(std::make_shared<MainState>());
+
+	while (!projectStack.empty())
+	{
+		projectStack.top()->Render();
+		projectStack.top()->Update(projectStack);
+	}
+
 	// Make process DPI aware and obtain main monitor scale
 	ImGui_ImplWin32_EnableDpiAwareness();
 	float main_scale = ImGui_ImplWin32_GetDpiScaleForMonitor(::MonitorFromPoint(POINT{ 0, 0 }, MONITOR_DEFAULTTOPRIMARY));
@@ -150,64 +163,6 @@ int main()
 		//HRESULT hr = g_pSwapChain->Present(0, 0); // Present without vsync
 		g_SwapChainOccluded = (hr == DXGI_STATUS_OCCLUDED);
 
-	}
-
-
-	{
-		//		std::cout << frequency << std::endl;
-		//		std::cout << "double frequency = ";
-		//		std::cin >> frequency;
-		//		frequency = std::clamp(frequency, 0.1, 64.0);
-		//
-		//		std::cout << "int32 octaves    = ";
-		//		std::cin >> octaves;
-		//		octaves = std::clamp(octaves, 1, 16);
-		//
-		//		std::cout << "Enter '0' for a random uint32 seed      = ";
-		//		std::cin >> seed;
-		//
-		//		double persistance;
-		//		std::cout << "0-100: The smaller the number the higher the correlation between values\nEnter Persistance      = ";
-		//		std::cin >> persistance;
-		//		persistance = std::lerp(0, 1, (persistance / 100));
-		//
-		//
-		//		if (seed == 0) { seed = std::random_device{}(); }
-		//
-		//		siv::PerlinNoise perlinA{ seed };
-		//
-		//		//	for (std::int32_t y = 0; y < 10; ++y)
-		//		//	{
-		//		//		for (std::int32_t x = 0; x < 10; ++x)
-		//		//		{
-		//		//			const double noise = perlinA.octave2D_01(x * 0.1, y * 0.1, octaves, persistance);
-		//		//			std::cout << static_cast<int>(std::floor(noise * 10) - 0.5) << "\t";
-		//		//		}
-		//		//		std::cout << '\n';
-		//		//	}
-		//
-		//		Image image{ 512,512 };
-		//
-		//		const double xFrequency = (frequency / image.width());
-		//		const double yFrequency = (frequency / image.height());
-		//
-		//		for (std::int32_t y = 0; y < image.height(); ++y)
-		//		{
-		//			for (std::int32_t x = 0; x < image.width(); ++x)
-		//			{
-		//				const RGB color(perlinA.octave2D_01((x * xFrequency), (y * yFrequency), octaves));
-		//				image.set(x, y, color);
-		//			}
-		//		}
-		//
-		//		std::stringstream ss;
-		//		ss << 'f' << frequency << 'o' << octaves << '_' << seed << ".bmp";
-		//
-		//		if (image.saveBMP(ss.str()))
-		//		{
-		//			std::cout << "...saved \"" << ss.str() << "\"\n";
-		//		}
-		//
 	}
 
 }

@@ -19,6 +19,9 @@
     <Filter Include="Source Files\ImGUI">
       <UniqueIdentifier>{3417382a-2727-4497-8c70-2d05459f1431}</UniqueIdentifier>
     </Filter>
+    <Filter Include="States">
+      <UniqueIdentifier>{9b094670-bcb4-4eb5-8245-bd552191f423}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SparkPerlin.cpp">
@@ -47,6 +50,12 @@
     </ClCompile>
     <ClCompile Include="ImGUI\imgui_widgets.cpp">
       <Filter>Source Files\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="MainState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="ConsoleState.cpp">
+      <Filter>States</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -79,6 +88,15 @@
     </ClInclude>
     <ClInclude Include="ImGUI\imstb_truetype.h">
       <Filter>Source Files\ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="MainState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsoleState.h">
+      <Filter>States</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
