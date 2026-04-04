@@ -16,8 +16,5 @@ int main()
 		projectStack.top()->Update(projectStack);
 	}
 
-	
-	
-
 }
 
