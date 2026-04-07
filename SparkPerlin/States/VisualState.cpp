@@ -253,6 +253,8 @@ void VisualState::Save()
 	if (myPerlinInfo.seed == 0) { myPerlinInfo.seed = std::random_device{}(); }
 
 	siv::PerlinNoise perlinA{ myPerlinInfo.seed };
+	
+	myPerlinInfo.persistance = std::lerp(0, 1, (myPerlinInfo.persistance / 100));
 
 	const double xFrequency = (myPerlinInfo.frequency / image.width());
 	const double yFrequency = (myPerlinInfo.frequency / image.height());
