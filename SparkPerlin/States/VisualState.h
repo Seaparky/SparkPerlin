@@ -20,7 +20,7 @@ private:
 
 	PerlinInfo myPerlinInfo;
 
-	Image image;
+	Image image{ 512,512 };
 };
 
 

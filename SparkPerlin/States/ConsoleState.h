@@ -19,7 +19,7 @@ private:
 		int persistance;
 	};
 
-	Image image;
+	Image image{512,512};
 
 	PerlinInfo myPerlinInfo;
 
