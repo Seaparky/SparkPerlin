@@ -29,15 +29,15 @@ struct BMPHeader
 static_assert(sizeof(BMPHeader) == 54);
 #pragma pack (pop)
 
-struct RGB
+struct PerlinRGB
 {
 	double r = 0.0;
 	double g = 0.0;
 	double b = 0.0;
-	constexpr RGB() = default;
-	explicit constexpr RGB(double _rgb) noexcept
+	constexpr PerlinRGB() = default;
+	explicit constexpr PerlinRGB(double _rgb) noexcept
 		: r{ _rgb }, g{ _rgb }, b{ _rgb } {}
-	constexpr RGB(double _r, double _g, double _b) noexcept
+	constexpr PerlinRGB(double _r, double _g, double _b) noexcept
 		: r{ _r }, g{ _g }, b{ _b } {}
 };
 
@@ -52,7 +52,7 @@ public:
 		, m_width{ static_cast<std::int32_t>(width) }
 		, m_height{ static_cast<std::int32_t>(height) } {}
 
-	void set(std::int32_t x, std::int32_t y, const RGB& color)
+	void set(std::int32_t x, std::int32_t y, const PerlinRGB& color)
 	{
 		if (!inBounds(y, x))
 		{
@@ -91,7 +91,7 @@ public:
 
 				for (std::int32_t x = 0; x < m_width; ++x)
 				{
-					const RGB& col = m_data[static_cast<std::size_t>(y) * m_width + x];
+					const PerlinRGB& col = m_data[static_cast<std::size_t>(y) * m_width + x];
 					line[pos++] = ToUint8(col.b);
 					line[pos++] = ToUint8(col.g);
 					line[pos++] = ToUint8(col.r);
@@ -110,7 +110,7 @@ public:
 
 private:
 
-	std::vector<RGB> m_data;
+	std::vector<PerlinRGB> m_data;
 
 	std::int32_t m_width = 0, m_height = 0;
 

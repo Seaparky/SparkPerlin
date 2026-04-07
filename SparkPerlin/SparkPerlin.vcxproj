@@ -141,6 +141,7 @@
     <ClCompile Include="SparkPerlin.cpp" />
     <ClCompile Include="States\ConsoleState.cpp" />
     <ClCompile Include="States\MainState.cpp" />
+    <ClCompile Include="States\VisualState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImGUI\imconfig.h" />
@@ -156,6 +157,7 @@
     <ClInclude Include="States\ConsoleState.h" />
     <ClInclude Include="States\MainState.h" />
     <ClInclude Include="States\ProjectState.h" />
+    <ClInclude Include="States\VisualState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

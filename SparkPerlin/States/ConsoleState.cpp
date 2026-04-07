@@ -72,7 +72,7 @@ void ConsoleState::Save()
 	{
 		for (std::int32_t x = 0; x < image.width(); ++x)
 		{
-			const RGB color(perlinA.octave2D_01((x * xFrequency), (y * yFrequency), myPerlinInfo.octaves, myPerlinInfo.persistance));
+			const PerlinRGB color(perlinA.octave2D_01((x * xFrequency), (y * yFrequency), myPerlinInfo.octaves, myPerlinInfo.persistance));
 			image.set(x, y, color);
 		}
 	}

@@ -1,5 +1,6 @@
 #include "MainState.h"
 #include "ConsoleState.h"
+#include "VisualState.h"
 
 bool MainState::Update(std::stack<std::shared_ptr<ProjectState>>& aProjectState)
 {
@@ -16,7 +17,7 @@ bool MainState::Update(std::stack<std::shared_ptr<ProjectState>>& aProjectState)
 		aProjectState.push(std::make_shared<ConsoleState>());
 		return true;
 	case MainState::Choice::ImGUI:
-
+		aProjectState.push(std::make_shared<VisualState>());
 		return true;
 	case MainState::Choice::Quit:
 		aProjectState.pop();
