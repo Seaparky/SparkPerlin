@@ -1,0 +1,20 @@
+High Priority:
+Use the float values generated to make output an environment
+Create a "Game State"
+"Game State" Has an option to use the made images or create a new one and show it
+"Game State" Shows a different environment based on the Perlin (maybe like diablo with rooms/show different letters for each "height")
+
+
+
+
+Low Priority:
+
+
+
+
+
+QOL Features:
+
+
+
+
