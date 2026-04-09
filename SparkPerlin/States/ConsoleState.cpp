@@ -30,6 +30,7 @@ bool ConsoleState::Update(std::stack<std::shared_ptr<ProjectState>>& aProjectSta
 		aProjectState.pop();
 		return false;
 	}
+	return false;
 }
 
 void ConsoleState::Render()

@@ -16,7 +16,7 @@ private:
 		double frequency;
 		int32_t octaves;
 		uint32_t seed;
-		int persistance;
+		double persistance;
 	};
 
 	Image image{512,512};

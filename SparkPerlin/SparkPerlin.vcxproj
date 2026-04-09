@@ -140,6 +140,7 @@
     <ClCompile Include="PerlinBase\example.cpp" />
     <ClCompile Include="SparkPerlin.cpp" />
     <ClCompile Include="States\ConsoleState.cpp" />
+    <ClCompile Include="States\GameState.cpp" />
     <ClCompile Include="States\MainState.cpp" />
     <ClCompile Include="States\VisualState.cpp" />
   </ItemGroup>
@@ -153,8 +154,10 @@
     <ClInclude Include="ImGUI\imstb_textedit.h" />
     <ClInclude Include="ImGUI\imstb_truetype.h" />
     <ClInclude Include="PerlinBase\PerlinImage.h" />
+    <ClInclude Include="PerlinBase\PerlinImageRead.h" />
     <ClInclude Include="PerlinBase\PerlinNoise.hpp" />
     <ClInclude Include="States\ConsoleState.h" />
+    <ClInclude Include="States\GameState.h" />
     <ClInclude Include="States\MainState.h" />
     <ClInclude Include="States\ProjectState.h" />
     <ClInclude Include="States\VisualState.h" />

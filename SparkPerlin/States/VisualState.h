@@ -15,7 +15,7 @@ private:
 		double frequency = 1;
 		int32_t octaves = 1;
 		uint32_t seed;
-		int persistance;
+		double persistance;
 	};
 
 	PerlinInfo myPerlinInfo;

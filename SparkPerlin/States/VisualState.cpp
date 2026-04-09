@@ -205,7 +205,11 @@ bool VisualState::Update(std::stack<std::shared_ptr<ProjectState>>& aProjectStat
 			
 			{
 				ImGui::InputDouble("Frequency", &myPerlinInfo.frequency);
-				ImGui::SliderInt("Persistance", &myPerlinInfo.persistance, 0, 100);
+
+				int tempval;
+				ImGui::SliderInt("Persistance", &tempval, 0, 100);
+				myPerlinInfo.persistance = std::lerp(0, 1, (myPerlinInfo.persistance / 100));
+
 				ImGui::SliderInt("Octaves", &myPerlinInfo.octaves,1,50);
 
 				if (ImGui::Button("Reseed"))
@@ -254,8 +258,6 @@ void VisualState::Save()
 
 	siv::PerlinNoise perlinA{ myPerlinInfo.seed };
 	
-	myPerlinInfo.persistance = std::lerp(0, 1, (myPerlinInfo.persistance / 100));
-
 	const double xFrequency = (myPerlinInfo.frequency / image.width());
 	const double yFrequency = (myPerlinInfo.frequency / image.height());
 

@@ -1,21 +1,12 @@
 #pragma once
 #include "ProjectState.h"
-class MainState : public ProjectState
+class GameState : public ProjectState
 {
 	virtual bool Update(std::stack<std::shared_ptr<ProjectState>>& aProjectState) override;
 	virtual void Render() override;
 
 private:
-	enum class Choice
-	{
-		Empty,
-		Console,
-		ImGUI,
-		Play,
-		Quit
-	};
 
-	Choice chosen;
 
 };
 

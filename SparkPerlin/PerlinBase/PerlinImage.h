@@ -52,6 +52,11 @@ public:
 		, m_width{ static_cast<std::int32_t>(width) }
 		, m_height{ static_cast<std::int32_t>(height) } {}
 
+	Image(Image& aCopy)
+		: m_data(aCopy.m_data)
+		, m_width(aCopy.m_width)
+		, m_height(aCopy.m_height) {};
+
 	void set(std::int32_t x, std::int32_t y, const PerlinRGB& color)
 	{
 		if (!inBounds(y, x))

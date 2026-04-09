@@ -57,6 +57,12 @@
     <ClCompile Include="States\MainState.cpp">
       <Filter>States</Filter>
     </ClCompile>
+    <ClCompile Include="States\GameState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="States\VisualState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PerlinBase\PerlinNoise.hpp">
@@ -96,6 +102,15 @@
       <Filter>States</Filter>
     </ClInclude>
     <ClInclude Include="States\ProjectState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="States\GameState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="PerlinBase\PerlinImageRead.h">
+      <Filter>PerlinBase</Filter>
+    </ClInclude>
+    <ClInclude Include="States\VisualState.h">
       <Filter>States</Filter>
     </ClInclude>
   </ItemGroup>
