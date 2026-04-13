@@ -218,6 +218,14 @@ bool VisualState::Update(std::stack<std::shared_ptr<ProjectState>>& aProjectStat
 				ImGui::Text("Seed = %d", myPerlinInfo.seed);
 			}
 
+			{
+				if (io.KeyCtrl && ImGui::IsKeyPressed(ImGuiKey_S))
+				{
+					Save();
+				}
+				
+			}
+
 			ImGui::End();
 		}
 
