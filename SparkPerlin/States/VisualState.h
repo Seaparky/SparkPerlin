@@ -18,6 +18,8 @@ private:
 		double persistance;
 	};
 
+	int fakePersistance = 1;
+
 	PerlinInfo myPerlinInfo;
 
 	Image image{ 512,512 };

@@ -206,8 +206,8 @@ bool VisualState::Update(std::stack<std::shared_ptr<ProjectState>>& aProjectStat
 			{
 				ImGui::InputDouble("Frequency", &myPerlinInfo.frequency);
 
-				int tempval;
-				ImGui::SliderInt("Persistance", &tempval, 0, 100);
+				
+				ImGui::SliderInt("Persistance", &fakePersistance, 1, 100);
 				myPerlinInfo.persistance = std::lerp(0, 1, (myPerlinInfo.persistance / 100));
 
 				ImGui::SliderInt("Octaves", &myPerlinInfo.octaves,1,50);
