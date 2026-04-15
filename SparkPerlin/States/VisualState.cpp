@@ -19,6 +19,9 @@ inline static bool                     g_SwapChainOccluded = false;
 inline static UINT                     g_ResizeWidth = 0, g_ResizeHeight = 0;
 inline static ID3D11RenderTargetView* g_mainRenderTargetView = nullptr;
 
+inline static ID3D11Texture2D* g_texture = nullptr;
+inline static ID3D11ShaderResourceView* g_SRV = nullptr;
+
 void CreateRenderTarget()
 {
 	ID3D11Texture2D* pBackBuffer;
@@ -208,7 +211,8 @@ bool VisualState::Update(std::stack<std::shared_ptr<ProjectState>>& aProjectStat
 
 				
 				ImGui::SliderInt("Persistance", &fakePersistance, 1, 100);
-				myPerlinInfo.persistance = std::lerp(0, 1, (myPerlinInfo.persistance / 100));
+				double persistanceValueDouble = (double)fakePersistance;
+				myPerlinInfo.persistance = std::lerp(0.0, 1.0, persistanceValueDouble / 100.0);
 
 				ImGui::SliderInt("Octaves", &myPerlinInfo.octaves,1,50);
 
@@ -227,6 +231,19 @@ bool VisualState::Update(std::stack<std::shared_ptr<ProjectState>>& aProjectStat
 			}
 
 			ImGui::End();
+		
+			ImGui::Begin("TEXTURE PREVIEW");
+			
+			if (g_SRV == nullptr)
+			{
+				ImGui::Text("GENERATE FIRST YOU FOOL");
+			}
+			else
+			{
+				ImGui::Image((ImTextureID)(intptr_t)g_SRV, { 512, 512 });
+			}
+
+			ImGui::End();
 		}
 
 		// Rendering
@@ -242,7 +259,7 @@ bool VisualState::Update(std::stack<std::shared_ptr<ProjectState>>& aProjectStat
 		g_SwapChainOccluded = (hr == DXGI_STATUS_OCCLUDED);
 		
 	}
-
+	
 	// Cleanup
 	ImGui_ImplDX11_Shutdown();
 	ImGui_ImplWin32_Shutdown();
@@ -279,10 +296,10 @@ void VisualState::Save()
 	}
 
 	std::stringstream ss;
-	ss << 'f' << myPerlinInfo.frequency << 'o' << myPerlinInfo.octaves << '_' << myPerlinInfo.seed << ".png";
+	ss << 'f' << myPerlinInfo.frequency << 'o' << myPerlinInfo.octaves << '_' << myPerlinInfo.seed << ".dds";
 
 	image.savePNG(ss.str());
-
+	image.CreateDXTextureResource(g_pd3dDevice, &g_texture, &g_SRV);
 }
 
 

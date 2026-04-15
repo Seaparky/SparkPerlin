@@ -5,6 +5,8 @@
 #include <sstream>
 #include "PerlinNoise.hpp"
 
+#include <d3d11.h>
+
 #pragma pack (push, 1)
 struct BMPHeader
 {
@@ -41,6 +43,23 @@ struct PerlinRGB
 		: r{ _r }, g{ _g }, b{ _b } {}
 };
 
+struct RGBA
+{
+	uint8_t r;
+	uint8_t g;
+	uint8_t b;
+	uint8_t a;
+
+	RGBA operator=(const PerlinRGB& aPRGB)
+	{
+		r = (uint8_t)(aPRGB.r * 255.0);
+		g = (uint8_t)(aPRGB.g * 255.0);
+		b = (uint8_t)(aPRGB.b * 255.0);
+		a = 255;
+		return *this;
+	}
+};
+
 class Image
 {
 public:
@@ -65,6 +84,54 @@ public:
 		}
 
 		m_data[static_cast<std::size_t>(y) * m_width + x] = color;
+	}
+
+	void CreateDXTextureResource( ID3D11Device* aDevice, ID3D11Texture2D** outResource, ID3D11ShaderResourceView** outSrv )
+	{
+		ID3D11Texture2D* pResource = *outResource;
+		ID3D11ShaderResourceView* pSRV = *outSrv;
+		if (pResource) pResource->Release();
+		if (pSRV) pSRV->Release();
+
+		D3D11_TEXTURE2D_DESC t2dDesc = {};
+		t2dDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+		t2dDesc.ArraySize = 1;
+		t2dDesc.CPUAccessFlags = 0;
+		t2dDesc.Width = m_width;
+		t2dDesc.Height = m_height;
+		t2dDesc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
+		t2dDesc.MipLevels = 1;
+		t2dDesc.MiscFlags = 0;
+		t2dDesc.Usage = D3D11_USAGE_IMMUTABLE;
+		t2dDesc.SampleDesc.Count = 1;
+		t2dDesc.SampleDesc.Quality = 0;
+
+		std::vector<RGBA> pixels;
+		pixels.reserve(m_data.size());
+
+		for (const auto& prgb : m_data)
+		{
+			pixels.emplace_back() = prgb;
+		}
+
+		D3D11_SUBRESOURCE_DATA imageData = {};
+		imageData.pSysMem = pixels.data();
+		imageData.SysMemPitch = sizeof(RGBA) * t2dDesc.Width;
+		imageData.SysMemSlicePitch = 0;
+
+		aDevice->CreateTexture2D(&t2dDesc, &imageData, &pResource);
+
+
+		D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
+		srvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+		srvDesc.Texture2D.MipLevels = 1;
+		srvDesc.Texture2D.MostDetailedMip = 0;
+		srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
+
+		aDevice->CreateShaderResourceView(pResource, &srvDesc, &pSRV);
+
+		(*outSrv) = pSRV;
+		(*outResource) = pResource;
 	}
 
 	std::int32_t width() const noexcept { return m_width; }
