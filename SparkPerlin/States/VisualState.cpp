@@ -232,7 +232,7 @@ bool VisualState::Update(std::stack<std::shared_ptr<ProjectState>>& aProjectStat
 
 			ImGui::End();
 		
-			ImGui::Begin("TEXTURE PREVIEW");
+			ImGui::Begin("TEXTURE PREVIEW", 0, ImGuiWindowFlags_NoResize);
 			
 			if (g_SRV == nullptr)
 			{
