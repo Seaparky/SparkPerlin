@@ -38,9 +38,11 @@ struct PerlinRGB
 	double b = 0.0;
 	constexpr PerlinRGB() = default;
 	explicit constexpr PerlinRGB(double _rgb) noexcept
-		: r{ _rgb }, g{ _rgb }, b{ _rgb } {}
+		: r{ _rgb }, g{ _rgb }, b{ _rgb } {
+	}
 	constexpr PerlinRGB(double _r, double _g, double _b) noexcept
-		: r{ _r }, g{ _g }, b{ _b } {}
+		: r{ _r }, g{ _g }, b{ _b } {
+	}
 };
 
 struct RGBA
@@ -69,12 +71,14 @@ public:
 	Image(std::size_t width, std::size_t height)
 		: m_data(width* height)
 		, m_width{ static_cast<std::int32_t>(width) }
-		, m_height{ static_cast<std::int32_t>(height) } {}
+		, m_height{ static_cast<std::int32_t>(height) } {
+	}
 
 	Image(Image& aCopy)
 		: m_data(aCopy.m_data)
 		, m_width(aCopy.m_width)
-		, m_height(aCopy.m_height) {};
+		, m_height(aCopy.m_height) {
+	};
 
 	void set(std::int32_t x, std::int32_t y, const PerlinRGB& color)
 	{
@@ -86,7 +90,7 @@ public:
 		m_data[static_cast<std::size_t>(y) * m_width + x] = color;
 	}
 
-	void CreateDXTextureResource( ID3D11Device* aDevice, ID3D11Texture2D** outResource, ID3D11ShaderResourceView** outSrv )
+	void CreateDXTextureResource(ID3D11Device* aDevice, ID3D11Texture2D** outResource, ID3D11ShaderResourceView** outSrv)
 	{
 		ID3D11Texture2D* pResource = *outResource;
 		ID3D11ShaderResourceView* pSRV = *outSrv;
@@ -179,6 +183,41 @@ public:
 			return false;
 		}
 	}
+
+
+	float** readPNG(const std::string& aPath)
+	{
+		float** outputData;
+
+
+
+		return outputData;
+
+	}
+
+	float** readPNG(const Image& aImage)
+	{
+		float** outputData;
+
+		outputData = new float* [aImage.m_height];
+
+		for (int y = 0;y < aImage.m_height;y++)
+		{
+			outputData[y] = new float[aImage.m_width];
+
+			for (int x = 0;x < aImage.m_width;x++)
+			{
+				outputData[y][x] = static_cast<float>(aImage.m_data[0].b / 255);
+
+			}
+		}
+
+
+
+		return outputData;
+
+	}
+
 
 private:
 

@@ -296,7 +296,7 @@ void VisualState::Save()
 	}
 
 	std::stringstream ss;
-	ss << 'f' << myPerlinInfo.frequency << 'o' << myPerlinInfo.octaves << '_' << myPerlinInfo.seed << ".dds";
+	ss << 'f' << myPerlinInfo.frequency << 'o' << myPerlinInfo.octaves << '_' << myPerlinInfo.seed << ".png";
 
 	image.savePNG(ss.str());
 	image.CreateDXTextureResource(g_pd3dDevice, &g_texture, &g_SRV);
