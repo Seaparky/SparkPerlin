@@ -218,6 +218,10 @@ public:
 
 	}
 
+	inline std::vector<PerlinRGB> GetData()
+	{
+		return m_data;
+	};
 
 private:
 

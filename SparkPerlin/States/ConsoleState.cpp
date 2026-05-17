@@ -54,6 +54,9 @@ void ConsoleState::Render()
 		break;
 	case 4:
 		std::cout << "\n--- IMAGE SAVED ---\n\n";
+		std::cout << image.GetData()[5].g << std::endl;
+		std::cout << image.GetData()[15].g << std::endl;
+		std::cout << image.GetData()[895].g << std::endl;
 		break;
 	}
 
